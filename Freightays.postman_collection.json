@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "21a1520e-98e5-4556-b67a-5c2c5c098f95",
+		"name": "Freightays",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Negative test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1789de3-ec9b-47e8-9838-b86bf5d646b7",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Response is undefined\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(undefined);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/idontexist",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"idontexist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Happy path test - Read",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99c820f2-b244-4d63-bad6-f235a3cc82ee",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Get Response userId\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.userId).to.eql(1);",
+							"})",
+							"",
+							"pm.test(\"Get Response id\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"})",
+							"",
+							"pm.test(\"Get Response title\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql(\"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\");",
+							"})",
+							"",
+							"pm.test(\"Get Response body\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.body).to.eql(\"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Happy path test - Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0512f6f1-3c43-45fb-9c73-c78e961c2169",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Get Response userId = 1\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.userId).to.eql(1);",
+							"})",
+							"",
+							"pm.test(\"Get Response id = 1\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"})",
+							"",
+							"pm.test(\"Get Response title = Hello\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql(\"Hello\");",
+							"})",
+							"",
+							"pm.test(\"Get Response body = Hello World\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.body).to.eql(\"Hello World\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": 1,\n    \"id\": 1,\n    \"title\": \"Hello\",\n    \"body\": \"Hello World\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Happy path test - Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "533a90d1-1faf-4281-9ce5-9030b057e139",
+						"exec": [
+							"pm.test(\"Status code is 201 = Created\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Get Response userId = 7\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.userId).to.eql(7);",
+							"})",
+							"",
+							"pm.test(\"Get Response id = 101\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(101);",
+							"})",
+							"",
+							"pm.test(\"Get Response title = New\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql(\"New\");",
+							"})",
+							"",
+							"pm.test(\"Get Response body = New post form Richard Lee\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.body).to.eql(\"New post form Richard Lee\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": 7,\n    \"title\": \"New\",\n    \"body\": \"New post form Richard Lee\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Happy path test - Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e9f77fd8-f643-4d23-8c38-f8174ad6bcf2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response is undefined\", function() {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(undefined);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
